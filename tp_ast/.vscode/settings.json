@@ -1,0 +1,13 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.core.resources-3.7.100.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.osgi-3.7.1.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.equinox.preferences-3.4.1.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.core.jobs-3.5.100.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.core.contenttype-3.4.100.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.equinox.common-3.6.0.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.core.runtime-3.6.0.v20100505.jar",
+        "c:\\Users\\doha\\Downloads\\org.eclipse.jdt.core-3.7.1.jar"
+    ]
+}
