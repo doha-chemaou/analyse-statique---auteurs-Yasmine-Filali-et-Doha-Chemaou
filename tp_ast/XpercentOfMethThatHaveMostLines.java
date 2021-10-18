@@ -18,7 +18,7 @@ public class XpercentOfMethThatHaveMostLines {// AvgNumberOfLinesByMethod method
         List<String> methods = new ArrayList<>();
         System.out.print("entrez un pourcentage pour savoir quelles sont les des méthodes qui ont le plus grand nombre d'attributs \n");
         int percent = IntermediateFunctions.percent_(num,sc);
-        //System.out.println(percent);
+        //System.out.println("XpercentOfMethThatHaveMostLines " + percent);
         int index = 0;
         for (Entry<String, Integer> element : sorted_meth_lines.entrySet()){
             if (index < percent){

@@ -108,7 +108,7 @@ public class IntermediateFunctions {
         double d_pourcentage = 0.0;
         if (pourcentage>1) d_pourcentage = (double)pourcentage/(double)100;
         // System.out.println("percent : d_pourcentage "+ d_pourcentage);
-        int number_of_classes = t.total_number_of_methods_in_all_classes();;
+        int number_of_classes = t.total_number_of_methods_in_all_classes();
         // System.out.println("percent : number of classes "+ number_of_classes);
         double d_classes_to_display = d_pourcentage*number_of_classes;
         // System.out.println("percent : number d_classes_to_display classes "+ d_classes_to_display);

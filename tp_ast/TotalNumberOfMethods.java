@@ -25,7 +25,7 @@ import org.eclipse.jdt.core.dom.SimpleName;
 
 public class TotalNumberOfMethods {
     File folder;
-    int[] total = {0};
+    private int[] total = {0};
     Hashtable<String,List<String>> classe_methods = new Hashtable<>();
     List<String> methods = new ArrayList<>();
     public TotalNumberOfMethods(File folder){
@@ -33,7 +33,7 @@ public class TotalNumberOfMethods {
     }
 
     public int total_number_of_methods_in_all_classes() throws IOException{
-        
+        total[0]=0;
         String class_name = "";
         
         for (File file : folder.listFiles()) {
