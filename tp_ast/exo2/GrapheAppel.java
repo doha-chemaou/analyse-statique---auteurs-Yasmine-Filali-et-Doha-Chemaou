@@ -1,3 +1,4 @@
+package exo2;
 /* Auteurs : 
 	Yasmine FILALI 
 	DohA CHEMAOU
@@ -19,24 +20,23 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.FieldDeclaration;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+//import org.graalvm.compiler.nodes.java.NewArrayNode;
 
-public class AvgNumberOfAttributes {
-    File folder;
-    Hashtable<String,List<String>> classe_attributes = new Hashtable<>();
-    List<String> attributes = new ArrayList<>();
-    public AvgNumberOfAttributes(File folder){
+public class GrapheAppel {
+    File folder ; 
+	List<String> methodsNames = new ArrayList<>();
+
+    public GrapheAppel(File folder){
         this.folder = folder;
     }
 
-    public int total_number_of_attributes_in_all_classes() throws IOException{
-        int[] total = {0};
-        String class_name = "";
-        
+    public void graphe_appel_par_classe() throws IOException{
+		// class name , method's names , entrees, sorties(liste des méthodes appelées par cette methode : nom methode , type statique de l'objet ) , 
+			String class_name = "";
         for (File file : folder.listFiles()) {
-            attributes = new ArrayList<>();
+            methodsNames = new ArrayList<>();
             String[] s = file.toString().split("\\\\");
             
             String class_name_java = s[s.length-1];
@@ -48,32 +48,22 @@ public class AvgNumberOfAttributes {
 			parser.setSource(string_file.toCharArray());
 			parser.setKind(ASTParser.K_COMPILATION_UNIT);	
 			final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
-
+	
 			cu.accept(new ASTVisitor() {
 				Set names = new HashSet();
-				public boolean visit(FieldDeclaration node) {//VariableDeclarationFragment
-                    VariableDeclarationFragment variable=(VariableDeclarationFragment)node.fragments().get(0);
-                    SimpleName name = variable.getName();//.getIdentifier();//getFullyQualifiedName()
-					//SimpleName name = node;
+				public boolean visit(MethodDeclaration node) {
+					SimpleName name = node.getName();
 					this.names.add(name.getIdentifier());
-                    total[0]++;
-                    attributes.add(name.getIdentifier());//node.toString());
+                    methodsNames.add(name.toString());
+					
 					return false; // do not continue to avoid usage info
 				}
+                /*public boolean visit(Block node) {
+					SimpleName name = node.getName();
+					this.names.add(name.getIdentifier());
+					return false; // do not continue to avoid usage info
+				}*/
 			});
-            classe_attributes.put(class_name,attributes);
 		}
-
-        return total[0];
-    }
-
-    public int avg(Number_of_classes n) throws IOException{
-        int avg = 0;
-        int sum = total_number_of_attributes_in_all_classes();
-        int number_of_classes = n.total_number_of_classes();
-        if(number_of_classes!=0)
-            avg = sum/number_of_classes;
-        return avg;
     }
 }
-

@@ -1,3 +1,5 @@
+package exo1;
+
 /* Auteurs : 
 	Yasmine FILALI 
 	DohA CHEMAOU

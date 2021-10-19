@@ -1,3 +1,5 @@
+package exo1;
+
 /* Auteurs : 
 	Yasmine FILALI 
 	DohA CHEMAOU
@@ -14,6 +16,8 @@ import java.util.Scanner;
 public class Test {
 	public static void main(String args[]) throws IOException{
 		File folder = new File("..\\visitorDesignPattern\\src");
+		
+		
 		Scanner sc = new Scanner(System.in);
 		//------------------------------------------------------ total number of classes
 		System.out.println("\n_________________________________________________________________________Q1 : nombre de classes \n");
