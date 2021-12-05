@@ -34,7 +34,7 @@ import org.eclipse.jdt.core.dom.TypeParameter;
 import org.eclipse.jdt.internal.core.search.matching.MatchLocatorParser.ClassAndMethodDeclarationVisitor;
 import org.eclipse.jdt.internal.core.search.matching.MatchLocatorParser.ClassButNoMethodDeclarationVisitor;
 
-import jdk.nashorn.api.tree.ClassDeclarationTree;
+
 
 public class Number_of_classes {
     File folder;
@@ -52,7 +52,8 @@ public class Number_of_classes {
             String class_name_java = s[s.length-1];
             String class_name = class_name_java.substring(0,class_name_java.length()-5);
             total++;
-            classes.add(class_name);
+            if (!classes.contains(class_name))
+                classes.add(class_name);
         }
         return total;
     }
@@ -92,7 +93,8 @@ public class Number_of_classes {
 					return false; // do not continue to avoid usage info
 				}
 			});
-            classes.add(class_name);
+            if (!classes.contains(class_name))
+                classes.add(class_name);
 		}
         number=total[0];
         return total[0];

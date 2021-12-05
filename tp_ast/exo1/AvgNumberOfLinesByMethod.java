@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 public class AvgNumberOfLinesByMethod { 
     File folder ;
+    //List<String> classes = new Number_of_classes(folder).classes;
     int maxParams = 0;
     String calss_with_meth_with_max_params = "";
     String meth_with_max_params = "";
@@ -54,7 +55,12 @@ public class AvgNumberOfLinesByMethod {
 				public boolean visit(MethodDeclaration node) {
                     String methode = node.toString();
                     SimpleName name = node.getName();
-
+                    System.out.println("SAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAA");
+                    System.out.println(node.parameters());
+                    /* adding parameters*/
+                    IntermediateFunctions.addingparameters((List<String>)node.parameters(),n.classes);
+                    //if(classes.contains(node.getType().toString()))
+                        //IntermediateFunctions.type_attribute_or_parameter.add(name.toString());  
                     String[] lines = methode.split("\n");
                     List<String> m = Arrays.asList(lines);
                     int number = m.size();

@@ -26,13 +26,14 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 public class AvgNumberOfAttributes {
     File folder;
+    //List<String> classes = new Number_of_classes(folder).classes;
     Hashtable<String,List<String>> classe_attributes = new Hashtable<>();
     List<String> attributes = new ArrayList<>();
     public AvgNumberOfAttributes(File folder){
         this.folder = folder;
     }
 
-    public int total_number_of_attributes_in_all_classes() throws IOException{
+    public int total_number_of_attributes_in_all_classes(List classes) throws IOException{
         int[] total = {0};
         String class_name = "";
         
@@ -58,19 +59,24 @@ public class AvgNumberOfAttributes {
 					//SimpleName name = node;
 					this.names.add(name.getIdentifier());
                     total[0]++;
+                    System.out.println("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    System.out.println(node.getType().toString());
+                    if(classes.contains(node.getType().toString()))
+                        IntermediateFunctions.type_attribute_or_parameter.add(name.toString());
                     attributes.add(name.getIdentifier());//node.toString());
 					return false; // do not continue to avoid usage info
 				}
 			});
             classe_attributes.put(class_name,attributes);
-		}
 
+		}
+        
         return total[0];
     }
 
     public int avg(Number_of_classes n) throws IOException{
-        int avg = 0;
-        int sum = total_number_of_attributes_in_all_classes();
+        int avg = 0;    
+        int sum = total_number_of_attributes_in_all_classes(n.classes);
         int number_of_classes = n.total_number_of_classes();
         if(number_of_classes!=0)
             avg = sum/number_of_classes;

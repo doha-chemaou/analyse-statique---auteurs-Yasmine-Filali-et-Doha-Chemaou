@@ -45,7 +45,7 @@ public class Test {
 		// ------------------------------------------------------ avg number of attributes
 		System.out.println("\n_________________________________________________________________________Q7 : nombre moyen d'attributs\n");
 		AvgNumberOfAttributes avg_num_of_att = new AvgNumberOfAttributes(folder);
-		total = avg_num_of_att.total_number_of_attributes_in_all_classes();
+		total = avg_num_of_att.total_number_of_attributes_in_all_classes(classes);
 		System.out.println("le nombre total d'attributs dans toutes les classes : "+ total+"\n");
 		//avg_num_of_att.total_number_of_attributes_in_all_classes();
 		//System.out.println(total+"\n");
@@ -142,7 +142,7 @@ public class Test {
 		}
 		
 		// nombre de lignes de l'app 
-		System.out.println("\n_________________________________________________________________________Q1 : nombre de lignes de l'application\n");
+		System.out.println("\n_________________________________________________________________________Q2 : nombre de lignes de l'application\n");
 		NumberOfLines num_lines = new NumberOfLines(folder);
 		int num_ = num_lines.number_of_lines_in_app();
 		System.out.println("Le nombre de lignes dans toute l'application : "+num_);
@@ -180,5 +180,11 @@ public class Test {
 		System.out.println("\n_________________________________________________________________________AFFICHAGE : classe - attributs\n");
 		System.out.println("\nvoici un affichage de l'ensemble des classes et de leurs attributs (0 attributs quand la classe n'a aucun attribut) :");
 		IntermediateFunctions.prints_classes(xpercent.sorted_attributes_by_class, "attributs");
+
+		Attributes att = new Attributes(folder);
+		att.attributes(num_of_classes);
+
 		}
+
+
 }

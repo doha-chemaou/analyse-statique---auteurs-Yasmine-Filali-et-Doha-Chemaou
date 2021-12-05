@@ -17,8 +17,24 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class IntermediateFunctions {
+    static List<String> type_attribute_or_parameter = new ArrayList<>();
+
     static int pourcentage;
     // works also for attributes 
+    public static void addingparameters(List parameters,List<String> classes){
+        System.out.println("²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²²² CLASSES");
+        System.out.println(classes);
+        for (Object param : parameters){
+            String par =  param.toString();
+            String[] type_name = par.split(" ");
+            if(classes.contains(type_name[0]) && !type_attribute_or_parameter.contains(par)){
+                type_attribute_or_parameter.add(par);
+            }
+
+    }
+    System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    System.out.println(type_attribute_or_parameter);
+}
     public static LinkedHashMap<String,List<String>> sort_classes_based_on_number_of_methods_or_attributes(Hashtable<String,List<String>> methods_of_classes){
         // not sorted yet
         Hashtable<String,List<String>> actual_hashtable = methods_of_classes;
