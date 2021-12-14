@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 public class Main {
 	
-	
+	static File folder;
 	public static String projectSourcePath;
 	
 	public static final String jrePath = "C:\\Program Files\\Java\\jre1.8.0_51\\lib\\rt.jar";
@@ -61,38 +61,50 @@ public class Main {
 		String class_name = "";
 
 		// read java files
-		final File folder = new File(projectSourcePath);
+		folder = new File(projectSourcePath);
 		
 		ArrayList<File> javaFiles = listJavaFilesForFolder(folder);
-		//
-		for (File fileEntry : javaFiles) {
-			String[] s = fileEntry.toString().split("\\\\");
-
-			String class_name_java = s[s.length-1];
-			class_name = class_name_java.substring(0,class_name_java.length()-5);
-			method_sorties = new Hashtable<>();
-			method_entrees = new Hashtable<>();
-
-
-			String content = read_file_at_once(fileEntry);
-
-			CompilationUnit parse = parse(content.toCharArray());
-
-			
-			printMethodInvocationInfo(parse);
-			System.out.println("\t\tméthodes - sorties");
-			System.out.println("\t\t------------------");
-			for (Map.Entry<String, List<String>> e : method_sorties.entrySet()){
-				System.out.println("\t\t"+e.getKey() + " : "+ e.getValue());
-			}
-			System.out.println("\n\t\tméthodes - entrées");
-			System.out.println("\t\t------------------");
-			for (Map.Entry<String, List<String>> e : method_entrees.entrySet()){
-				System.out.println("\t\t"+e.getKey() + " : "+ e.getValue());
-			}
-			System.out.println("_____________________________________________"+class_name);
-
+		while (javaFiles.size() == 0) {
+			System.out.println("the given path is empty, please give a path that contains a file at least");
+			inputReader = new BufferedReader(new InputStreamReader(System.in));
+			projectSourcePath = inputReader.readLine();
+			folder = new File(projectSourcePath);
+			javaFiles = listJavaFilesForFolder(folder);
 		}
+		//
+		if(javaFiles.size() == 0) 
+			System.out.println("le fichier "+ class_name+".java est vide");
+		else {
+			for (File fileEntry : javaFiles) {
+				String[] s = fileEntry.toString().split("\\\\");
+
+				String class_name_java = s[s.length-1];
+				class_name = class_name_java.substring(0,class_name_java.length()-5);
+				method_sorties = new Hashtable<>();
+				method_entrees = new Hashtable<>();
+
+
+				String content = read_file_at_once(fileEntry);
+
+				CompilationUnit parse = parse(content.toCharArray());
+
+				
+				printMethodInvocationInfo(parse);
+				
+					System.out.println("\t\tméthodes - sorties");
+					System.out.println("\t\t------------------");
+					for (Map.Entry<String, List<String>> e : method_sorties.entrySet()){
+						System.out.println("\t\t"+e.getKey() + " : "+ e.getValue());
+					}
+					System.out.println("\n\t\tméthodes - entrées");
+					System.out.println("\t\t------------------");
+					for (Map.Entry<String, List<String>> e : method_entrees.entrySet()){
+						System.out.println("\t\t"+e.getKey() + " : "+ e.getValue());
+					}
+					System.out.println("_____________________________________________"+class_name);
+			}
+		}
+		
 	}
 
 	// read all java files from specific folder

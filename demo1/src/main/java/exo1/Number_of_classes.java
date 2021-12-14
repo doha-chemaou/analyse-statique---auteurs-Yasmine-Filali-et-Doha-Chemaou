@@ -56,10 +56,11 @@ public class Number_of_classes {
     				public boolean visit(TypeDeclaration node) {
     					SimpleName name = node.getName();
                         total++;
+                        classes.add(class_name);
+
     					return false; // do not continue to avoid usage info
     				}
     			});
-                classes.add(class_name);
             }
             else {
             	if(file.isDirectory())

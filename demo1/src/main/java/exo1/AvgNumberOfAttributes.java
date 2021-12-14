@@ -26,6 +26,8 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 public class AvgNumberOfAttributes {
     int total = 0;
     File folder;
+    String class_name = "";
+
     Hashtable<String,List<String>> classe_attributes = new Hashtable<>();
     List<String> attributes = new ArrayList<>();
     public AvgNumberOfAttributes(File folder){
@@ -33,7 +35,6 @@ public class AvgNumberOfAttributes {
     }
 
     public int total_number_of_attributes_in_all_classes(File folder) throws IOException{
-        String class_name = "";
         
         for (File file : folder.listFiles()) {
             attributes = new ArrayList<>();
@@ -66,12 +67,12 @@ public class AvgNumberOfAttributes {
 					//SimpleName name = node;
 					this.names.add(name.getIdentifier());
                     total++;
+                    classe_attributes.put(class_name,attributes);
                     attributes.add(name.getIdentifier());
 					return false; // do not continue to avoid usage info
 				}
 			});
             
-            classe_attributes.put(class_name,attributes);
             }
 
                 else {

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 public class IntermediateFunctions {
     static int pourcentage;
+    static LinkedHashMap<String , List<String>> res_sorted_hashtable = new LinkedHashMap<>();
     // works also for attributes 
     public static LinkedHashMap<String,List<String>> sort_classes_based_on_number_of_methods_or_attributes(Hashtable<String,List<String>> methods_of_classes){
         // not sorted yet
@@ -35,40 +36,43 @@ public class IntermediateFunctions {
             number_of_methods_by_class.add(size);
         }
         List<Integer>sorted_number_of_methods_by_class=number_of_methods_by_class.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-        
-        int replacement = sorted_number_of_methods_by_class.get(0)+1;
-        int number_of_meth = 0;
-        int index = 0;
-        String actual_class;
-        List<String> actual_methods;
-        Hashtable<Integer, Hashtable<String,List<String>>> sorted_hashtable = new Hashtable<Integer,Hashtable<String,List<String>>>();
-        Hashtable<String, List<String>> element_to_put_in_sorted_hashtable = new Hashtable<String,List<String>>();
-        while(!l_methods_by_class.isEmpty() && !l_classes.isEmpty()){
-            number_of_meth = l_methods_by_class.get(0).size();
-            index = sorted_number_of_methods_by_class.indexOf(number_of_meth);
-            actual_methods = l_methods_by_class.get(0);
-            actual_class = l_classes.get(0);
-            element_to_put_in_sorted_hashtable.put(actual_class,actual_methods);
-            sorted_hashtable.put(index,element_to_put_in_sorted_hashtable);
+        if(sorted_number_of_methods_by_class.size()>0) {
+        	int replacement = sorted_number_of_methods_by_class.get(0)+1;
+            int number_of_meth = 0;
+            int index = 0;
+            String actual_class;
+            List<String> actual_methods;
+            Hashtable<Integer, Hashtable<String,List<String>>> sorted_hashtable = new Hashtable<Integer,Hashtable<String,List<String>>>();
+            Hashtable<String, List<String>> element_to_put_in_sorted_hashtable = new Hashtable<String,List<String>>();
+            while(!l_methods_by_class.isEmpty() && !l_classes.isEmpty()){
+                number_of_meth = l_methods_by_class.get(0).size();
+                index = sorted_number_of_methods_by_class.indexOf(number_of_meth);
+                actual_methods = l_methods_by_class.get(0);
+                actual_class = l_classes.get(0);
+                element_to_put_in_sorted_hashtable.put(actual_class,actual_methods);
+                sorted_hashtable.put(index,element_to_put_in_sorted_hashtable);
 
-            element_to_put_in_sorted_hashtable = new Hashtable<>();
-            sorted_number_of_methods_by_class.set(index,replacement);
-            l_methods_by_class.remove(0);
-            l_classes.remove(0);
- 
-        }
-        LinkedHashMap<String , List<String>> res_sorted_hashtable = new LinkedHashMap<String,List<String>>();
-        String key;
-        List<String> element;
-        int i = 0;
-        for(Map.Entry entry: sorted_hashtable.entrySet()){
-            for(Map.Entry entry1: sorted_hashtable.get(i).entrySet()){
-                key = entry1.getKey().toString(); 
-                element = (List) (entry1.getValue());
-                res_sorted_hashtable.put(key,element);
+                element_to_put_in_sorted_hashtable = new Hashtable<>();
+                sorted_number_of_methods_by_class.set(index,replacement);
+                l_methods_by_class.remove(0);
+                l_classes.remove(0);
+     
             }
-            i++;
+            res_sorted_hashtable = new LinkedHashMap<String,List<String>>();
+            String key;
+            List<String> element;
+            int i = 0;
+            for(Map.Entry entry: sorted_hashtable.entrySet()){
+                for(Map.Entry entry1: sorted_hashtable.get(i).entrySet()){
+                    key = entry1.getKey().toString(); 
+                    element = (List) (entry1.getValue());
+                    res_sorted_hashtable.put(key,element);
+                }
+                i++;
+            }
         }
+    	
+        
         return res_sorted_hashtable;
     }
     static int percent(int num, Scanner sc) throws IOException{
@@ -116,6 +120,8 @@ public class IntermediateFunctions {
 
     public static void prints_classes(LinkedHashMap<String,List<String>> linkedhash, String string){
         List<String> classes;
+        if(linkedhash.entrySet().size() == 0 ) 
+        	System.out.println("---------------------> les fichiers sont vides");
         for (Map.Entry<String, List<String>> element : linkedhash.entrySet()){
             System.out.println("**********************************************");
             System.out.print("La classe " + element.getKey()+ " a : ");
@@ -150,6 +156,8 @@ public class IntermediateFunctions {
         return sorted_lines_of_methods;
     }
     public static void prints_methods(LinkedHashMap<String,Integer> linkedhash){
+    	if(linkedhash.entrySet().size() == 0)
+    		System.out.println("---------------------> les fichiers sont vides");
         for (Map.Entry<String, Integer> element : linkedhash.entrySet()){
             System.out.println("**********************************************");
             System.out.println("La methode \n" + element.getKey()+ "\ninclut : " + element.getValue() + " lignes\n");

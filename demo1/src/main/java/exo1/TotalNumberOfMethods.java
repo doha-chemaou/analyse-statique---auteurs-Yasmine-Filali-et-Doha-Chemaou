@@ -27,6 +27,8 @@ import org.eclipse.jdt.core.dom.SimpleName;
 
 public class TotalNumberOfMethods {
     File folder;
+    static String class_name = "";
+
     private int[] total = {0};
     Hashtable<String,List<String>> classe_methods = new Hashtable<>();
     List<String> methods = new ArrayList<>();
@@ -36,7 +38,6 @@ public class TotalNumberOfMethods {
 
     public int total_number_of_methods_in_all_classes(File folder) throws IOException{
         total[0]=0;
-        String class_name = "";
         
         for (File file : folder.listFiles()) {
             methods = new ArrayList<>();
@@ -61,11 +62,11 @@ public class TotalNumberOfMethods {
 					SimpleName name = node.getName();
 					this.names.add(name.getIdentifier());
                     total[0]++;
+                    classe_methods.put(class_name,methods);
                     methods.add(name.toString());
 					return false; // do not continue to avoid usage info
 				}
 			});
-            classe_methods.put(class_name,methods);
             }
 
                 else {
@@ -73,6 +74,7 @@ public class TotalNumberOfMethods {
                 		total_number_of_methods_in_all_classes(new File(folder+"\\"+class_name_java));
                 }
 		}
+       
         return total[0];
     }
 }

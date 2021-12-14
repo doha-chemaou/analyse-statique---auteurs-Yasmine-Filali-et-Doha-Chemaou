@@ -41,7 +41,7 @@ public class AvgNumberOfLinesByMethod {
         	String[] s = file.toString().split("\\\\");
             
         	String class_name_java = s[s.length-1];
-            if(file.isFile() && class_name_java.endsWith(".java")) {
+            if(file.isFile() && class_name_java.endsWith(".java") && n.classes.size()>0 && j < n.classes.size()) {
             final String class_name = n.classes.get(j);
             Path path = Paths.get(file.toString());
 			String string_file = Files.readString(path, StandardCharsets.US_ASCII);
@@ -68,8 +68,6 @@ public class AvgNumberOfLinesByMethod {
                                 String[] parts = meth_name.split(" ");
                                 String[] meth = Arrays.copyOfRange(parts, 1, parts.length);
                                 meth_name = String.join(" ", meth);
-                                
-
                             } 
                             
 
@@ -88,9 +86,7 @@ public class AvgNumberOfLinesByMethod {
                         i++;
                     }
                     
-                    number_of_lines_for_meth+=m.size();
-
-                    
+                    number_of_lines_for_meth+=m.size();                    
 					return false; // do not continue to avoid usage info
 				}
 			});
@@ -106,8 +102,11 @@ public class AvgNumberOfLinesByMethod {
 	}
 
     public int avg_linese_meth(int n) {
+    	int returned_value = 0;
         int nombre_de_methodes = n;
-        return number_of_lines_for_meth/ nombre_de_methodes;
+        if (nombre_de_methodes!=0)
+        	returned_value = number_of_lines_for_meth/ nombre_de_methodes; 
+        return returned_value;
     }
 
     
